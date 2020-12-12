@@ -12,6 +12,7 @@
 # production
 /server/build
 /server/dist
+/server/coverage
 /ui/build
 /ui/dist
 
