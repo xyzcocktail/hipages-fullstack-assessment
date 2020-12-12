@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "yarn run clean && yarn run build && node -r source-map-support/register dist/index.js",
     "start:dev": "nodemon",
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "cover": "jest --coverage",
     "lint": "./node_modules/.bin/tslint ."
   },
