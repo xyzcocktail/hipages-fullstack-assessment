@@ -1,7 +1,7 @@
-import { Category } from './category.interface';
-import { Suburb } from './suburb.interface';
+import { ICategory } from './category.interface';
+import { ISuburb } from './suburb.interface';
 
-export interface Job {
+export interface IJob {
   id: number,
   status: string,
   suburbId: number,
@@ -13,7 +13,7 @@ export interface Job {
   description: string,
 }
 
-export interface JobDetail extends Job {
-  category: Category,
-  suburb: Suburb,
+export interface IJobDetail extends IJob {
+  category: ICategory,
+  suburb: ISuburb,
 }

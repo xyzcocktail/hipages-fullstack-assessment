@@ -1,40 +1,33 @@
-import { getRepository } from 'typeorm';
+import { getConnection, getRepository } from 'typeorm';
 import HttpException from '../utils/HttpException';
-import { Job } from '../interfaces/job.interface';
-import { JobEntity } from '../models/entity/jobs.entity';
+import { IJob, IJobDetail } from '../interfaces/job.interface';
+import { JobEntity, JobDetailEntity } from '../models/entity/jobs.entity';
 import { isEmpty } from '../utils/util';
 
 class JobService {
-  public jobs = JobEntity;
+  public jobs = JobDetailEntity;
 
-  public async findAll(): Promise<Job[]> {
+  public async findAll(): Promise<IJobDetail[]> {
     const jobRepository = getRepository(this.jobs);
-    const jobs: Job[] = await jobRepository.find();
+    const jobs: IJobDetail[] = await jobRepository.find({
+      join: {
+        alias: 'jobs',
+        leftJoinAndSelect: {
+          suburb: 'jobs.suburb',
+          category: 'jobs.category',
+        },
+      },
+    });
     return jobs;
   }
 
-  public async findJobById(jobId: number): Promise<Job> {
+  public async findOneById(jobId: number): Promise<IJobDetail> {
     const jobRepository = getRepository(this.jobs);
-    const retJob: Job = await jobRepository.findOne({ where: { id: jobId } });
+    const retJob: IJobDetail = await jobRepository.findOne({ where: { id: jobId } });
     if (!retJob) {
       throw new HttpException(409, 'Not found!');
     }
     return retJob;
-  }
-
-  public async updateJob(jobId: number, jobData: Job): Promise<Job> {
-    if (isEmpty(jobData)) {
-      throw new HttpException(400, 'Empty jobData!');
-    }
-    const jobRepository = getRepository(this.jobs);
-    const retJob: Job = await jobRepository.findOne({ where: { id: jobId } });
-    if (!retJob) {
-      throw new HttpException(409, 'Not found!');
-    }
-    // await jobRepository.update(jobId, { ...jobData });
-
-    const updatedJob: Job = await jobRepository.findOne({ where: { id: jobId } });
-    return updatedJob;
   }
 }
 

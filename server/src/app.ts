@@ -20,9 +20,9 @@ class App {
     this.env = process.env.NODE_ENV || 'development';
 
     this.connectToDatabase();
-    this.initializeMiddlewares();
-    this.initializeRoutes(routes);
-    this.initializeErrorHandling();
+    this.initMiddlewares();
+    this.initRoutes(routes);
+    this.initErrorHandling();
   }
 
   public getServer() {
@@ -45,7 +45,7 @@ class App {
       });
   }
 
-  private initializeMiddlewares() {
+  private initMiddlewares() {
     if (this.env === 'production') {
       this.app.use(morgan('combined', { stream }));
       this.app.use(cors({ origin: 'hipages.com.au', credentials: true }));
@@ -58,13 +58,13 @@ class App {
     this.app.use(express.urlencoded({ extended: true }));
   }
 
-  private initializeRoutes(routes: Routes[]) {
+  private initRoutes(routes: Routes[]) {
     routes.forEach((route) => {
       this.app.use('/', route.router);
     });
   }
 
-  private initializeErrorHandling() {
+  private initErrorHandling() {
     this.app.use(errorMiddleware);
   }
 }

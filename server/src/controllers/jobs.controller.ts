@@ -1,15 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
-import { Job } from '../interfaces/job.interface';
-import jobService from '../services/jobs.service';
+import { IJob, IJobDetail } from '../interfaces/job.interface';
+import jobService from '../services/jobs.query.service';
 
 class JobsController {
   public jobService = new jobService();
 
   public getJobs = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const retJobsData: Job[] = await this.jobService.findAll();
+      const retJobsData: IJobDetail[] = await this.jobService.findAll([]);
 
-      res.status(200).json({ data: retJobsData, message: 'Successful [Jobs]' });
+      res.status(200).json({ message: 'Successful', type: 'IJobsDetails', data: retJobsData });
     } catch (error) {
       next(error);
     }
@@ -18,21 +18,21 @@ class JobsController {
   public getJobById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const jobId = Number(req.params.id);
-      const retJobData: Job = await this.jobService.findJobById(jobId);
+      const retJobData: IJobDetail = await this.jobService.findOneById(jobId);
 
-      res.status(200).json({ data: retJobData, message: 'Successful {Job}' });
+      res.status(200).json({ message: 'Successful', type: 'IJobsDetail', data: retJobData });
     } catch (error) {
       next(error);
     }
   };
 
-  public updateJob = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public updateJobStatus = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const jobId = Number(req.params.id);
-      const jobData: Job = req.body;
-      const retJobData: Job = await this.jobService.updateJob(jobId, jobData);
+      const jobData: IJob = req.body;
+      const retJobData: IJob = await this.jobService.updateJobStatus(jobId, jobData);
 
-      res.status(200).json({ data: retJobData, message: 'Successful {Job}' });
+      res.status(200).json({ message: 'Updated Successfully', type: 'IJobsDetail', data: retJobData });
     } catch (error) {
       next(error);
     }

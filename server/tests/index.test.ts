@@ -5,14 +5,13 @@ import IndexRoute from '../src/routes/index.route';
 
 let app: App;
 
-beforeAll(async (done) => {
+beforeAll(async () => {
   const indexRoute = new IndexRoute();
   app = new App([indexRoute]);
-  done();
 });
 
 afterAll(async () => {
-  await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
+  await new Promise<void>((resolve) => setTimeout(() => resolve(), 500));
 });
 
 describe('Testing Index: ', () => {

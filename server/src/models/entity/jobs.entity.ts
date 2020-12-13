@@ -1,12 +1,21 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { IsNotEmpty } from 'class-validator';
-import { Job } from '../../interfaces/job.interface';
+import { IJob } from '../../interfaces/job.interface';
+import { CategoryEntity } from './category.entity';
+import { SuburbEntity } from './suburb.entity';
 
 export type enumStatusText = 'new' | 'accepted' | 'declined';
 
 @Entity('jobs')
-// @Unique(['contactEmail'])
-export class JobEntity implements Job {
+export abstract class JobEntity implements IJob {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -51,4 +60,15 @@ export class JobEntity implements Job {
 
   @UpdateDateColumn({ type: 'timestamp', name: 'updated_at' })
   updatedAt: number;
+}
+
+@Entity('jobs')
+export class JobDetailEntity extends JobEntity {
+  @OneToOne(() => SuburbEntity)
+  @JoinColumn()
+  suburb: SuburbEntity;
+
+  @OneToOne(() => CategoryEntity)
+  @JoinColumn()
+  category: CategoryEntity;
 }
