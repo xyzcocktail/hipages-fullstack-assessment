@@ -15,6 +15,7 @@ class JobsRoute implements Route {
 
   private initializeRoutes() {
     this.router.get(`${this.path}`, this.jobsController.getJobs);
+    this.router.get(`${this.path}/resetdata`, this.jobsController.resetAllJobs);
     this.router.get(`${this.path}/:id(\\d+)`, this.jobsController.getJobById);
     this.router.put(`${this.path}/:id(\\d+)`,
       validationMiddleware(UpdateJobStatusDto, 'body', true),

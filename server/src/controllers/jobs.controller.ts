@@ -37,6 +37,16 @@ class JobsController {
       next(error);
     }
   };
+
+  public resetAllJobs = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const retJobData: IJobDetail[] = await this.jobService.resetAll();
+
+      res.status(200).json({ message: 'Successful', type: 'IJobsDetails', data: retJobData });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default JobsController;

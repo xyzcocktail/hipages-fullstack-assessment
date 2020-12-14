@@ -73,6 +73,15 @@ class JobQueryService {
       .execute();
     return await this.findOneById(jobId);
   }
+
+  public async resetAll(): Promise<IJobDetail[]> {
+    const retReset = await getConnection()
+      .createQueryBuilder()
+      .update(JobEntity)
+      .set({ status: 'new', updatedAt: null })
+      .execute();
+    return await this.findAll([]);
+  }
 }
 
 export default JobQueryService;
