@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import API from '../../utils/Api';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useLeadContextProvider } from '../LeadContext';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
 import Tab from '@material-ui/core/Tab';
@@ -18,21 +18,10 @@ const useStyles = makeStyles((theme) => ({
 
 const LeadTabPanel = () => {
   const classes = useStyles();
-  const [loading, setLoading] = useState(false);
-  const [allLeads, setAllLeads] = useState([]);
+  const { loading, newLeads, acceptedLeads } = useLeadContextProvider();
   const [currTabIdx, setCurrTabIdx] = useState('1');
 
-  useEffect(() => {
-    console.info('***** useEffect *****');
-    API().get('api/jobs')
-      .then(resp => {
-        console.info(resp.data);
-        setAllLeads(resp.data.data);
-        setLoading(true);
-      });
-  },[]);
-
-  const handleChange = (event, newValue) => {
+  const changeHandler = (event, newValue) => {
     setCurrTabIdx(newValue);
   };
 
@@ -42,16 +31,16 @@ const LeadTabPanel = () => {
         <Grid item xs={8}>
           <TabContext value={currTabIdx}>
             <AppBar position="static">
-              <TabList onChange={handleChange} aria-label="Lead management tab">
+              <TabList onChange={changeHandler} aria-label="Lead management tab">
                 <Tab label="Invited" value="1"/>
                 <Tab label="Accepted" value="2"/>
               </TabList>
             </AppBar>
             <TabPanel value="1">
-              <LeadList type='invited' items={allLeads} loading={loading} />
+              <LeadList items={newLeads} loading={loading} />
             </TabPanel>
             <TabPanel value="2">
-              <LeadList type='accepted' items={allLeads} loading={loading} />
+              <LeadList items={acceptedLeads} loading={loading} />
             </TabPanel>
           </TabContext>
         </Grid>

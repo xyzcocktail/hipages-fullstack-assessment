@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   AppBar,
   CssBaseline,
@@ -7,9 +8,13 @@ import {
   Slide,
   useScrollTrigger,
 } from "@material-ui/core";
+import IconButton from '@material-ui/core/IconButton';
+import MoreIcon from '@material-ui/icons/MoreVert';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from "wouter";
 import clsx from "clsx";
-import { useState } from "react";
+import {useLeadContextProvider} from "../../leads/LeadContext";
 
 const drawerWidth = 240;
 
@@ -83,6 +88,16 @@ function HideOnScroll(props) {
 export default function PersistentTopBar(props) {
   const classes = useStyles();
   const [open] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const { resetDataHandler } = useLeadContextProvider();
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <div className={classes.root}>
@@ -95,6 +110,23 @@ export default function PersistentTopBar(props) {
                 LEADS MANAGEMENT
               </Typography>
             </Link>
+            <IconButton
+              aria-controls="more-menu"
+              aria-label="display more actions"
+              edge="end"
+              color="inherit"
+              onClick={handleClick}>
+              <MoreIcon />
+            </IconButton>
+            <Menu
+              id="more-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={() => resetDataHandler()}>RESET DATA</MenuItem>
+            </Menu>
           </Toolbar>
         </AppBar>
       </HideOnScroll>

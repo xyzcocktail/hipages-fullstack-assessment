@@ -1,9 +1,8 @@
-// import { useContext, useState } from 'react';
-// import { Snackbar } from '@material-ui/core';
-// import { Alert } from '@material-ui/lab';
+import { makeStyles } from '@material-ui/core/styles';
 import InvitedItem from './InvitedItem';
 import AcceptedItem from './AcceptedItem';
-import { makeStyles } from '@material-ui/core/styles';
+import { useLeadContextProvider } from '../LeadContext';
+import { LoadingLead } from './Skeleton';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,23 +11,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LeadList = (props) => {
-  console.info(`***** LeadList *****`);
-  console.info(props);
+  const { loading } = useLeadContextProvider();
   const classes = useStyles();
 
-  const filtered = (props.type && props.type == 'accepted')
-    ? props.items.filter(item => { return item.status == 'accepted'})
-    : props.items.filter(item => { return item.status != 'accepted'});
+  const cnt = props.items.length;
+
+  console.info(`** LeadList ${cnt} **`);
+  console.info(props);
 
   return (
     <div className={classes.root}>
-      {filtered.map(lead => {
-        return (
-          lead.status == 'accepted'
-            ? <AcceptedItem key={lead.id} data={lead} />
-            : <InvitedItem key={lead.id} data={lead} />
-        );
-      })}
+      {loading ? (
+        cnt > 0 && props.items ? (
+          props.items.map(lead => {
+            return (
+              lead.status === 'accepted'
+                ? <AcceptedItem key={lead.id} data={lead} />
+                : <InvitedItem key={lead.id} data={lead} />
+            )
+          })
+        ) : (
+          <div>Empty</div>
+        )
+      ) : (
+        <LoadingLead />
+      )}
     </div>
   );
 };

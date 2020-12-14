@@ -1,16 +1,17 @@
-import { useContext } from "react";
-import { MainContext } from "./context/MainContext";
+import { Route } from "wouter";
+import { LeadProvider } from "./leads/LeadContext";
 import PersistentTopBar from "./common/components/PersistentTopBar";
 import LeadTabPanel from './leads/components/LeadTabPanel';
-import { Route } from "wouter";
 
 function App() {
   return (
     <div style={{ height: "100vh" }}>
-      <PersistentTopBar />
-      <Route path="/">
-        <LeadTabPanel />
-      </Route>
+      <LeadProvider>
+        <PersistentTopBar />
+        <Route path="/">
+          <LeadTabPanel />
+        </Route>
+      </LeadProvider>
     </div>
   );
 }

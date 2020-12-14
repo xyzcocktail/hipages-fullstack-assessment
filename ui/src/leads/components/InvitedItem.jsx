@@ -25,6 +25,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import {useLeadContextProvider} from "../LeadContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const InvitedItem = (props) => {
+  const { acceptHandler, declineHandler, } = useLeadContextProvider();
   const classes = useStyles();
   const item = props.data;
 
@@ -86,10 +88,10 @@ const InvitedItem = (props) => {
       <Divider component="li" />
 
       <ListItem>
-        <Button variant="contained" color="secondary">
+        <Button variant="contained" onClick={() => acceptHandler(item.id)} color="secondary">
           Accept
         </Button>
-        <Button variant="contained">
+        <Button variant="contained" onClick={() => declineHandler(item.id)}>
           Decline
         </Button>
         {item.price} Lead Invitation
