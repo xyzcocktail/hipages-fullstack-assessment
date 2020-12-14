@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
-import InvitedItem from './InvitedItem';
-import AcceptedItem from './AcceptedItem';
+import LeadItem from './LeadItem';
 import { useLeadContextProvider } from '../LeadContext';
 import { LoadingLead } from './Skeleton';
+import EmptyItem from './EmptyItem';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,11 +13,7 @@ const useStyles = makeStyles((theme) => ({
 const LeadList = (props) => {
   const { loading } = useLeadContextProvider();
   const classes = useStyles();
-
   const cnt = props.items.length;
-
-  console.info(`** LeadList ${cnt} **`);
-  console.info(props);
 
   return (
     <div className={classes.root}>
@@ -25,13 +21,11 @@ const LeadList = (props) => {
         cnt > 0 && props.items ? (
           props.items.map(lead => {
             return (
-              lead.status === 'accepted'
-                ? <AcceptedItem key={lead.id} data={lead} />
-                : <InvitedItem key={lead.id} data={lead} />
+              <LeadItem key={lead.id} data={lead} />
             )
           })
         ) : (
-          <div>Empty</div>
+          <EmptyItem label='EMPTY DATA' />
         )
       ) : (
         <LoadingLead />

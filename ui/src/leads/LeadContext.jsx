@@ -25,16 +25,6 @@ export const LeadProvider = ({ children }) => {
     });
   }
 
-  const getLeads = () => {
-    API().get('api/jobs').then(resp => {
-      console.info(resp.data);
-      setInitLeads(resp.data.data);
-      setLoading(true);
-    }).catch(err => {
-      console.info(err);
-    });
-  }
-
   const acceptHandler = (jobId) => {
     console.info(`***** [acceptHandler] : ${jobId} *****`);
     API().put(`api/jobs/${jobId}`, { status: 'accepted' }).then(resp => {
@@ -58,7 +48,13 @@ export const LeadProvider = ({ children }) => {
 
   useEffect(() => {
     console.info('***** [LeadProvider] useEffect *****');
-    getLeads();
+    API().get('api/jobs').then(resp => {
+      console.info(resp.data);
+      setInitLeads(resp.data.data);
+      setLoading(true);
+    }).catch(err => {
+      console.info(err);
+    });
   },[]);
 
   return (

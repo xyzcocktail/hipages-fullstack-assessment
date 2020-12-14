@@ -1,11 +1,11 @@
 import { render } from "react-dom";
-import { MainProvider } from "./context/MainContext";
+import { LeadProvider } from './leads/LeadContext';
 import App from "./App";
 import "./styles.css";
 
 render(
-  <MainProvider>
+  <LeadProvider>
     <App />
-  </MainProvider>,
+  </LeadProvider>,
   document.getElementById("root")
 );

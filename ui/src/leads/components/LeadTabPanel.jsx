@@ -10,10 +10,16 @@ import TabContext from '@material-ui/lab/TabContext';
 import LeadList from './LeadList';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
+  tabHeader: {
+    width: '100%',
+    backgroundColor : '#fff',
+    boxShadow : '0 1px 2px rgba(0,0,0,0.1)',
+    border : '1px solid #ddd',
+    marginBottom : "16px"
   },
+  tabContent : {
+    padding: 0
+  }
 }));
 
 const LeadTabPanel = () => {
@@ -26,26 +32,29 @@ const LeadTabPanel = () => {
   };
 
   return (
-    <div className={classes.root}>
-      <Grid container direction="row" justify="center" alignItems="flex-start">
-        <Grid item xs={8}>
-          <TabContext value={currTabIdx}>
-            <AppBar position="static">
-              <TabList onChange={changeHandler} aria-label="Lead management tab">
-                <Tab label="Invited" value="1"/>
-                <Tab label="Accepted" value="2"/>
-              </TabList>
-            </AppBar>
-            <TabPanel value="1">
-              <LeadList items={newLeads} loading={loading} />
-            </TabPanel>
-            <TabPanel value="2">
-              <LeadList items={acceptedLeads} loading={loading} />
-            </TabPanel>
-          </TabContext>
-        </Grid>
+    <Grid container direction="row" justify="center" alignItems="flex-start">
+      <Grid item xs={8}>
+        <TabContext value={currTabIdx}>
+          <AppBar position="static" className={classes.tabHeader}>
+            <TabList
+              onChange={changeHandler}
+              aria-label="Lead management tab"
+              variant="fullWidth"
+              indicatorColor="primary"
+            >
+              <Tab label="Invited" value="1"/>
+              <Tab label="Accepted" value="2"/>
+            </TabList>
+          </AppBar>
+          <TabPanel value="1" className={classes.tabContent}>
+            <LeadList items={newLeads} loading={loading} />
+          </TabPanel>
+          <TabPanel value="2" className={classes.tabContent}>
+            <LeadList items={acceptedLeads} loading={loading} />
+          </TabPanel>
+        </TabContext>
       </Grid>
-    </div>
+    </Grid>
   );
 }
 
