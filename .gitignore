@@ -13,6 +13,8 @@
 /server/build
 /server/dist
 /server/coverage
+/server/src/logs/
+/server/.tomg-config
 /ui/build
 /ui/dist
 
@@ -27,6 +29,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+src/logs/
+
 # IDE
 .vscode/
 .idea/
+

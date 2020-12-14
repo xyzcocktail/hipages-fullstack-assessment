@@ -1,6 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { render } from "react-dom";
+import { MainProvider } from "./context/MainContext";
+import App from "./App";
+import "./styles.css";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+render(
+  <MainProvider>
+    <App />
+  </MainProvider>,
+  document.getElementById("root")
+);

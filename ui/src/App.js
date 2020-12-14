@@ -1,26 +1,18 @@
-import React, { Component } from 'react';
-import './App.css';
+import { useContext } from "react";
+import { MainContext } from "./context/MainContext";
+import PersistentTopBar from "./common/components/PersistentTopBar";
+import LeadTabPanel from './leads/components/LeadTabPanel';
+import { Route } from "wouter";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div style={{ height: "100vh" }}>
+      <PersistentTopBar />
+      <Route path="/">
+        <LeadTabPanel />
+      </Route>
+    </div>
+  );
 }
 
 export default App;
