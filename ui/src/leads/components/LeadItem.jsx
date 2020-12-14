@@ -111,11 +111,13 @@ const LeadItem = (props) => {
   const { acceptHandler, declineHandler, } = useLeadContextProvider();
   const classes = useStyles();
   const item = props.data;
-
   const dispDateTime = (dt) => {
-    if (dt) {
+    if (dt)
       return moment(dt).format('MMMM Do YYYY @ h:mm a');
-    }
+  }
+  const filterFirstName = (name) => {
+    if (name)
+      return name.split(/[\s,]+/)[0];
   }
 
   return (
@@ -129,8 +131,16 @@ const LeadItem = (props) => {
           </ListItemAvatar>
           <ListItemText
             disableTypography
-            primary={<Typography type="body1" className={classes.contactName}>{item.contactName}</Typography>}
-            secondary={<Typography type="body2" className={classes.small}>{dispDateTime(item.createdAt)}</Typography>}
+            primary={
+              <Typography type="body1" className={classes.contactName}>
+                {item.status === 'new' ? (filterFirstName(item.contactName)) : (item.contactName)}
+              </Typography>
+            }
+            secondary={
+              <Typography type="body2" className={classes.small}>
+                {dispDateTime(item.createdAt)}
+              </Typography>
+            }
           />
         </ListItem>
       </ListItem>

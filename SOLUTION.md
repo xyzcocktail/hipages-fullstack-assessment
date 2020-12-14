@@ -1,2 +1,2 @@
-Your Solution Documentation
-===========================
+Solution Documentation
+======================

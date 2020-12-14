@@ -25,7 +25,7 @@ const LeadList = (props) => {
             )
           })
         ) : (
-          <EmptyItem label='EMPTY DATA' />
+          <EmptyItem />
         )
       ) : (
         <LoadingLead />
