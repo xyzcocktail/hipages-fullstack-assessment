@@ -3,7 +3,7 @@ import { ConnectionOptions } from 'typeorm';
 const env = process.env.NODE_ENV || 'development';
 const dbConn: ConnectionOptions = {
   type: 'mysql',
-  host: process.env.MYSQL_HOST || 'localhost',
+  host: process.env.MYSQL_HOST || 'database',
   port: Number(process.env.MYSQL_PORT) || 3306,
   username: process.env.MYSQL_USERNAME,
   password: process.env.MYSQL_PASSWORD,
