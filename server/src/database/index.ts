@@ -8,7 +8,7 @@ const dbConn: ConnectionOptions = {
   username: process.env.MYSQL_USERNAME,
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DATABASE,
-  synchronize: true,
+  synchronize: false,
   logging: false,
   entities: [env === 'production' ? 'dist/models/entity/*{.ts,.js}' : 'src/models/entity/*{.ts,.js}'],
   migrations: [env === 'production' ? 'dist/models/migration/*{.ts,.js}' : 'src/models/migration/*{.ts,.js}'],

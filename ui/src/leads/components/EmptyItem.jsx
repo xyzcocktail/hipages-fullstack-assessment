@@ -6,7 +6,7 @@ import List from '@material-ui/core/List';
 const useStyles = makeStyles((theme) => ({
   card: {
     width: '100%',
-    height: '100px',
+    height: '60px',
     backgroundColor: 'white',
     marginBottom: '16px',
     borderRadius: '2px',
@@ -22,7 +22,7 @@ const EmptyItem = (props) => {
 
   return (
     <List className={classes.card}>
-      <Grid container direction="row" justify="center" alignItems="center">
+      <Grid container direction="row" justify="center" alignItems="flex-start">
         {text}
       </Grid>
     </List>
