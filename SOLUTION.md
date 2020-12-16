@@ -3,40 +3,48 @@ Solution Documentation
 
 ## Table of Contents
 
-- hipages Full Stack Engineer Tech Challenge
+- Hipages - Full Stack Engineer Tech Challenge
     - [Overview](#overview)
     - [Technical Overview](#technical-overview)
     - [Getting Started](#getting-started)
     - [API Document](#api-document)
-      - [1. All Leads](#1-all-leads)
-      - [2. Update Status](#2-update-status)
-    - [Business Requirements](#business-requirements) 
-    - [Conclusion](#conclusion) 
+        - [1. All Leads](#1-all-leads)
+        - [2. Update Status](#2-update-status)
+    - [Business Requirements](#business-requirements)
+    - [Conclusion](#conclusion)
 
 ---
-    
+
 ## Overview
 
-The service provides rest api to get all leads to present and accept or decline a lead from invited leads.
+This service in test provides the restful APIs to get all leads to show, accept or decline it from the invited leads.
+I have fully used the provided boilerplate from Hipages.
 
-Please refer to [API Document](#api-document) for the API details and [Business requirements](#business-requirements)
+Please refer to the [API Document](#api-document) for the API details and [Business requirements](#business-requirements)
 
 ## Technical Overview
 
 `Backend Technical Stack`
-    
-I have an experience with [Sequelize](https://sequelize.org/) 
-but I tried to use [TypeORM](https://typeorm.io/) to compare them.
+
+Here are lists of my choices for this project as follows:
 
 - [Node js v10.15](https://nodejs.org/)
-- [Typescript v3.2.2](https://www.typescriptlang.org/)  
+- [Typescript v3.2.2](https://www.typescriptlang.org/)
 - [Express v4.16.4](https://expressjs.com/)
 - [TypeORM v0.2.29](https://typeorm.io/)
 
+I have used ORM libraries such as [Sequelize](https://sequelize.org/), or TypeORM,
+in this case I wanted to go with the TypeORM that is a bit fresher choice to me, 
+so I chose that, nothing much of particular reason though.
+
 `Frontend Technical Stack`
+
+For the frontend, Here are my lists as follows:
 
 - [React v17.0.1](https://reactjs.org/)
 - [Material UI v4.11.0](https://material-ui.com/)
+
+React is the one I chose however, I am also having many years of AngularJS and some Angular 8 experiences.
 
 ## Getting Started
 
@@ -46,7 +54,7 @@ $ cd hipages-fullstack-assessment
 $ docker-compose up -d (RUN) 
 $ docker-compose down (STOP)
 ```
-- You can access at [http://localhost:3000](http://localhost:3000)   
+- In the Docker env, I have set it to the localhost with the port 3000, you can access at [http://localhost:3000](http://localhost:3000)
 
 ---
 ## API Document
@@ -57,10 +65,10 @@ $ docker-compose down (STOP)
 | ------------ | ------------------ | ------ | -------- |
 | Content-Type | `application/json` | string | required |
 
-### 1. All Leads
+### 1. All Leads (or filtering with Ids)
 
 #### Request
-- [GET] /api/jobs/:id 
+- [GET] /api/jobs/:id
 
 #### Params
 - id : number (option)
@@ -177,11 +185,46 @@ Create a lead management UI for a tradie. This should be presented as a single p
         * Contact phone number
         * Contact email
 
-    ### Notes
+   ### Notes
     * For the icons in the UI, you can use something like font-awesome or SVG icons, whatever you choose.
     * There are jobs already loaded into the database
 
 ## Conclusion
 
-- BDD - https://github.com/bencompton/jest-cucumber
-- Automation - test - CI/CD ?  
+While I have been in with this challenge,
+I didn't have any problem to start, and the end of design.
+I certainly chose those stacks in the description, and happy to go with this.
+
+just one thing I haven't been cleared, there was a bit of confusion in the READ.me where the first name 
+in the "Invited" tab would only show the "first name" whereas the "Accepted" tab shows an additional information 
+which requires the full name from the DB column "contact_name".
+
+It is obviously better we could separate this one named column into two or have two more extra name fields 
+like "first_name" and "last_name". 
+
+We could consider more if I got given more time:
+
+1. State changes - we don't indicate (confirm modal) any of ongoing process or event triggered.
+2. Better to have a proper pipelines in CI/CD process with automation.
+3. We might need to consider the vulnerabilities of API and add more secure layer and test env in the pipeline to check.
+
+I have added a little of unit testing on the backend side using Jest,
+but we might need a proper QA control and also in the frontend side.
+it could happen by the approach of having QA automation such as TDD and BDD.
+
+Overall, I have been cleared myself and have tried myself to understand what was the purpose of this test,
+and what the lead of tech seemed to archive by this test from candidates and what candidates need to prove, If I am not wrong..
+
+Last but not least, Need a proper concept of building architecture and platform - it might be for the solution architecture -
+scalability and securituty (which are part of DevOps) whcih are the one of the most important thing during building a software
+that drag a software to the right productive level.
+
+I enjoyed this :)
+
+
+
+
+
+
+
+
