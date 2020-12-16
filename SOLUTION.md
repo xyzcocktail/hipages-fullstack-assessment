@@ -33,9 +33,8 @@ Here are lists of my choices for this project as follows:
 - [Express v4.16.4](https://expressjs.com/)
 - [TypeORM v0.2.29](https://typeorm.io/)
 
-I have used ORM libraries such as [Sequelize](https://sequelize.org/), or TypeORM,
-in this case I wanted to go with the TypeORM that is a bit fresher choice to me, 
-so I chose that, nothing much of particular reason though.
+I have experience using [Sequelize](https://sequelize.org/) before, 
+however, I used TypeORM in this project because I wanted to try out a new ORM which I am unfamiliar with. 
 
 `Frontend Technical Stack`
 
@@ -44,7 +43,7 @@ For the frontend, Here are my lists as follows:
 - [React v17.0.1](https://reactjs.org/)
 - [Material UI v4.11.0](https://material-ui.com/)
 
-React is the one I chose however, I am also having many years of AngularJS and some Angular 8 experiences.
+React is the one I chose however, I have many years of experience using AngularJS and Angular 8.
 
 ## Getting Started
 
@@ -191,35 +190,31 @@ Create a lead management UI for a tradie. This should be presented as a single p
 
 ## Conclusion
 
-While I have been in with this challenge,
-I didn't have any problem to start, and the end of design.
-I certainly chose those stacks in the description, and happy to go with this.
+While I have been in this challenge, I didn't have any problem completing this task.
+I chose some of modern js framework in the description.
 
-just one thing I haven't been cleared, there was a bit of confusion in the READ.me where the first name 
-in the "Invited" tab would only show the "first name" whereas the "Accepted" tab shows an additional information 
+Just one thing I haven't been cleared, there was a bit of confusion in the READ.me where the first name 
+in the "Invited" tab would only show the "first name", whereas the "Accepted" tab shows an additional information 
 which requires the full name from the DB column "contact_name".
 
-It is obviously better we could separate this one named column into two or have two more extra name fields 
+It is obviously better if we could separate this one named column into two or have two more extra name fields 
 like "first_name" and "last_name". 
 
-We could consider more if I got given more time:
+We could consider few enhancements if more time was allowed:
 
-1. State changes - we don't indicate (confirm modal) any of ongoing process or event triggered.
-2. Better to have a proper pipelines in CI/CD process with automation.
-3. We might need to consider the vulnerabilities of API and add more secure layer and test env in the pipeline to check.
+1. I have added a little of unit testing on the backend side using Jest. 
+   I would build more stable system using TDD and BDD since there will be less risk caused in the system.
+2. State changes - there is no indication of (confirm modal) any of ongoing process or event triggered.
+3. It would be better to have a proper pipelines in CI/CD process with automation.
+4. We might need to consider the vulnerabilities of API and add more secure layer and test env in the pipeline to check.
 
-I have added a little of unit testing on the backend side using Jest,
-but we might need a proper QA control and also in the frontend side.
-it could happen by the approach of having QA automation such as TDD and BDD.
+Overall, I have been cleared myself and have tried myself to understand what was the purpose of this test.
 
-Overall, I have been cleared myself and have tried myself to understand what was the purpose of this test,
-and what the lead of tech seemed to archive by this test from candidates and what candidates need to prove, If I am not wrong..
+I hope everything I did is accurate and comprehensible 
 
-Last but not least, Need a proper concept of building architecture and platform - it might be for the solution architecture -
-scalability and securituty (which are part of DevOps) whcih are the one of the most important thing during building a software
-that drag a software to the right productive level.
+I really enjoyed taking this task :) 
 
-I enjoyed this :)
+Thank you. 
 
 
 
